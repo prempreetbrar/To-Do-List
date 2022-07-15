@@ -11,7 +11,7 @@ export default function NewToDoForm({addToList}) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    addToList({id: uuidv4(), task});
+    addToList({id: uuidv4(), task, isCompleted: false});
     setTask("");
   }
 

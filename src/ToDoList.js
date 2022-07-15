@@ -18,14 +18,32 @@ export default function ToDoList() {
   function editToDo(toDoId, newTask) {
     const taskToEdit = allToDos.find(toDo => toDo.id === toDoId);
     const positionInList = allToDos.indexOf(taskToEdit);
-    const newAllToDos = [...allToDos.slice(0, positionInList), {id: toDoId, task: newTask}, ...allToDos.slice(positionInList + 1)];
+    const newAllToDos = [...allToDos.slice(0, positionInList), {...taskToEdit, task: newTask}, ...allToDos.slice(positionInList + 1)];
+    setAllToDos(newAllToDos);
+  }
+
+  function completeToDo(toDoId, isItCompleteString) {
+    const isItComplete = isItCompleteString === "true" ? true : false;
+    const taskToComplete = allToDos.find(toDo => toDo.id === toDoId);
+    const positionInList = allToDos.indexOf(taskToComplete);
+    const newAllToDos = [...allToDos.slice(0, positionInList), {...taskToComplete, isCompleted: isItComplete}, ...allToDos.slice(positionInList + 1)];
     setAllToDos(newAllToDos);
   }
 
   return (
     <> 
       <NewToDoForm addToList={addToList}/>
-      {allToDos.map(toDo => <ToDo key={toDo.id} id={toDo.id} task={toDo.task} deleteToDo={deleteToDo} editToDo={editToDo}/>)}
+      {allToDos.map(({id, task, isCompleted}) => 
+        <ToDo 
+          key={id} 
+          id={id} 
+          task={task} 
+          deleteToDo={deleteToDo} 
+          editToDo={editToDo}
+          completeToDo={completeToDo}
+          isCompleted={isCompleted}
+        />)
+      }
     </>
   )
 

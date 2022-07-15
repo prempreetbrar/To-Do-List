@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ToDo({id, task, deleteToDo, editToDo}) {
+export default function ToDo({id, task, deleteToDo, editToDo, completeToDo, isCompleted}) {
   const [isEditing, setIsEditing] = useState(false);
   const [taskWhileEditing, setTaskWhileEditing] = useState(task);
 
@@ -15,10 +15,14 @@ export default function ToDo({id, task, deleteToDo, editToDo}) {
   function handleEdit(event) {
     event.preventDefault();
     if (!isEditing) setIsEditing(true);
-    else {
+    else {    
       editToDo(id, taskWhileEditing);
       setIsEditing(false);
     }
+  }
+
+  function handleComplete(event) {
+    completeToDo(id, event.target.value);
   }
 
   return (
@@ -32,12 +36,18 @@ export default function ToDo({id, task, deleteToDo, editToDo}) {
 
       {!isEditing &&
         <>
-          <div>Task: {task}</div>
+          {isCompleted && <del>Task: {task}</del>}
+          {!isCompleted && <p>Task: {task}</p>}
           <button onClick={handleDelete}>X</button>
           <button onClick={handleEdit}>Edit</button>
         </>
       }
-      
+      {!isCompleted &&
+        <button onClick={handleComplete} value="true">Mark as Completed</button>
+      }
+      {isCompleted &&
+        <button onClick={handleComplete} value="false">Mark as Uncompleted</button>
+      }
     </>
   )
 }
