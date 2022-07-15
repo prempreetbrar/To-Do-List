@@ -41,15 +41,16 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
 
       {!isEditing &&
         <div className="ToDo">
-          {isCompleted && <li className="ToDo-task completed" onClick={handleToggle}>Task: {task}</li>}
-          {!isCompleted && <li className="ToDo-task uncompleted" onClick={handleToggle}>Task: {task}</li>}
+          {<li className="ToDo-task" onClick={handleToggle}>
+            <span className={isCompleted ? "ToDo-task-text strikethrough" : "ToDo-task-text"}>{task}</span>
+          </li>}
           <div className="ToDo-buttons">
             <IconButton onClick={handleEdit}>
-              <EditIcon/>
+              <EditIcon sx={{color: "white"}}/>
             </IconButton>
 
             <IconButton onClick={handleDelete}>
-              <DeleteIcon/>
+              <DeleteIcon sx={{color: "white"}}/>
             </IconButton>
           </div>
         </div>
