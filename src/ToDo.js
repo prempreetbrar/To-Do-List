@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-export default function ToDo({id, task, deleteToDo, editToDo, completeToDo, isCompleted}) {
+import "./ToDo.css";
+
+export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, isCompleted}) {
   const [isEditing, setIsEditing] = useState(false);
   const [taskWhileEditing, setTaskWhileEditing] = useState(task);
 
@@ -21,8 +23,8 @@ export default function ToDo({id, task, deleteToDo, editToDo, completeToDo, isCo
     }
   }
 
-  function handleComplete(event) {
-    completeToDo(id, event.target.value);
+  function handleToggle(event) {
+    toggleComplete(id);
   }
 
   return (
@@ -36,17 +38,11 @@ export default function ToDo({id, task, deleteToDo, editToDo, completeToDo, isCo
 
       {!isEditing &&
         <>
-          {isCompleted && <del>Task: {task}</del>}
-          {!isCompleted && <p>Task: {task}</p>}
+          {isCompleted && <li className="completed" onClick={handleToggle}>Task: {task}</li>}
+          {!isCompleted && <li onClick={handleToggle}>Task: {task}</li>}
           <button onClick={handleDelete}>X</button>
           <button onClick={handleEdit}>Edit</button>
         </>
-      }
-      {!isCompleted &&
-        <button onClick={handleComplete} value="true">Mark as Completed</button>
-      }
-      {isCompleted &&
-        <button onClick={handleComplete} value="false">Mark as Uncompleted</button>
       }
     </>
   )
