@@ -15,9 +15,16 @@
   background: none;
   border: none;
   outline: none;
+
   resize: vertical;
   overflow: hidden;
   min-width: 70%;
+  min-height: fit-content;
+
+  font-size: inherit;
+  font: inherit;
+  color: white;
+  margin: 1.1rem 0;
 }
 
 ::-webkit-resizer {

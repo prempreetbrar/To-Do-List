@@ -16,7 +16,7 @@ export default function NewToDoForm({addToList}) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="NewToDoForm" onSubmit={handleSubmit}>
       <input name="task" placeholder={"New Task"} onInput={handleInput} value={task}/>
       <button>ADD</button>
     </form>

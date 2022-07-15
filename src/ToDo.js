@@ -1,9 +1,10 @@
 import { useState } from "react";
 
 import "./ToDo.css";
+import CheckIcon from '@mui/icons-material/Check';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { IconButton } from '@mui/material';
+import { Icon, IconButton } from '@mui/material';
 import { TextareaAutosize } from "@mui/base";
 
 export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, isCompleted}) {
@@ -36,7 +37,9 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
       {isEditing && 
         <form className="ToDo" onSubmit={handleEdit}>
           <textarea className="ToDo-task ToDo-edit" autoFocus name="task" value={taskWhileEditing} onInput={handleInput}/>
-          <button>SUBMIT</button>
+          <IconButton onClick={handleEdit}>
+            <CheckIcon sx={{color: "white"}}/>
+          </IconButton>
         </form>
       }
 
