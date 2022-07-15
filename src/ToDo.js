@@ -30,7 +30,7 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
   return (
     <>
       {isEditing && 
-        <form onSubmit={handleEdit}>
+        <form className="Todo" onSubmit={handleEdit}>
           <input name="task" id="editForm" value={taskWhileEditing} onInput={handleInput}/>
           <button>SUBMIT</button>
         </form>
@@ -38,8 +38,8 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
 
       {!isEditing &&
         <>
-          {isCompleted && <li className="completed" onClick={handleToggle}>Task: {task}</li>}
-          {!isCompleted && <li onClick={handleToggle}>Task: {task}</li>}
+          {isCompleted && <li className="completed Todo" onClick={handleToggle}>Task: {task}</li>}
+          {!isCompleted && <li className="Todo" onClick={handleToggle}>Task: {task}</li>}
           <button onClick={handleDelete}>X</button>
           <button onClick={handleEdit}>Edit</button>
         </>

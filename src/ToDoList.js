@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import NewToDoForm from "./NewToDoForm";
 import ToDo from "./ToDo";
+import "./ToDoList.css"
 
 export default function ToDoList() {
   const [allToDos, setAllToDos] = useState([]);
@@ -30,8 +31,11 @@ export default function ToDoList() {
   }
 
   return (
-    <> 
-      <NewToDoForm addToList={addToList}/>
+    <div className="ToDoList"> 
+      <h1>
+        ToDo List
+        <span>Prioritize your goals and maximize productivity</span>
+      </h1>
       <ul>
         {allToDos.map(toDoItem => 
           <ToDo 
@@ -43,7 +47,8 @@ export default function ToDoList() {
           />)
         }
       </ul>
-    </>
+      <NewToDoForm addToList={addToList}/>
+    </div>
   )
 
 }
