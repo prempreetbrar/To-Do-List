@@ -1,18 +1,64 @@
 .ToDo {
     display: flex;
     margin: 0 -3rem 0.75rem;
-    padding: 1.1rem 3rem;
+    padding: 0rem 2.25rem 0rem 3rem;
     justify-content: space-between;
     align-items: center;
     background: rgba(255, 255, 255, 0.1);
 }
 
+.edit-form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .edit-form label {
+    min-width: 100%;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+  }
+  .edit-form input {
+    flex-grow: 1;
+    border: none;
+    background: #f7f1f1;
+    padding: 0 1.5em;
+    font-size: initial;
+  }
+  .edit-form button {
+    padding: 0 1.3rem;
+    border: none;
+    background: #ff6666;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-left: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease-out;
+  }
+
+  .edit-form button:hover {
+    background: #ff5e5e;
+  }
+  .edit-form input,
+  .edit-form button {
+    font-family: "Quicksand", sans-serif;
+    height: 3rem;
+  }
+  
+
 .ToDo-task {
     position: relative;
     transition: opacity 0.4s linear;
+    width: fit-content;
+    max-width: 70%;
+    white-space: normal;
+    overflow-wrap: break-word;
+
+    padding: 1rem 0;
 }
 
 .ToDo-task.completed {
+    text-decoration: line-through;
     opacity: 0.6;
 }
 
@@ -29,8 +75,52 @@
     animation: strikeitem 0.5s ease-out 0s forwards;
 }
 
+.ToDo-task.completed:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -0.5rem;
+    display: block;
+    width: 0%;
+    height: 2px;
+    background: white;
+    animation: reversestrikeitem 0.5s ease-out 0s forwards;
+}
+
 @keyframes strikeitem {
     to {
         width: calc(100% + 1rem);
     }
+}
+
+
+
+
+
+
+
+
+.task-el__content {
+    line-height: 20px;
+    min-height: 20px;
+    word-wrap: break-word;
+/*     white-space: pre-wrap; */
+    position: relative;
+}
+
+.task-el__content span {
+  position: relative;
+}
+
+.task-el__content span {
+  width: calc(100%);
+  background-image: linear-gradient(black, black);
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size 3s;
+  background-position: 0% 50%;
+}
+
+.task-el__content span.strikethrough {
+  background-size: 100% 2px;
 }

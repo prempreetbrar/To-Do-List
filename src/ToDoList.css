@@ -11,7 +11,13 @@
     box-shadow: -20px -20px 0px 0px rgba(100, 100, 100, 0.1);
 }
 
+.edit-form {
+    display: flex;
+}
+
 .ToDoList h1 {
+    display: flex;
+    flex-direction: column;
     font-weight: normal;
     font-size: 2.6rem;
     letter-spacing: 0.05em;
@@ -24,7 +30,6 @@
 }
 
 .ToDoList h1 span {
-    display: flex;
     font-size: 0.8rem;
     margin-bottom: 0.7rem;
     margin-left: 0.1rem;

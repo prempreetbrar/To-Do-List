@@ -1,6 +1,9 @@
 import { useState } from "react";
 
 import "./ToDo.css";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { IconButton } from '@mui/material';
 
 export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, isCompleted}) {
   const [isEditing, setIsEditing] = useState(false);
@@ -30,7 +33,7 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
   return (
     <>
       {isEditing && 
-        <form className="ToDo" onSubmit={handleEdit}>
+        <form className="ToDo edit-form" onSubmit={handleEdit}>
           <input name="task" id="editForm" value={taskWhileEditing} onInput={handleInput}/>
           <button>SUBMIT</button>
         </form>
@@ -39,10 +42,15 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
       {!isEditing &&
         <div className="ToDo">
           {isCompleted && <li className="ToDo-task completed" onClick={handleToggle}>Task: {task}</li>}
-          {!isCompleted && <li className="ToDo-task" onClick={handleToggle}>Task: {task}</li>}
+          {!isCompleted && <li className="ToDo-task uncompleted" onClick={handleToggle}>Task: {task}</li>}
           <div className="ToDo-buttons">
-            <button onClick={handleDelete}>X</button>
-            <button onClick={handleEdit}>Edit</button>
+            <IconButton onClick={handleEdit}>
+              <EditIcon/>
+            </IconButton>
+
+            <IconButton onClick={handleDelete}>
+              <DeleteIcon/>
+            </IconButton>
           </div>
         </div>
       }
