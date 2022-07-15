@@ -11,48 +11,23 @@
   color: white;
 }
 
-.edit-form {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .edit-form label {
-    min-width: 100%;
-    margin-bottom: 0.5rem;
-    font-size: 1.3rem;
-  }
-  .edit-form input {
-    flex-grow: 1;
-    border: none;
-    background: #f7f1f1;
-    padding: 0 1.5em;
-    font-size: initial;
-  }
-  .edit-form button {
-    padding: 0 1.3rem;
-    border: none;
-    background: #ff6666;
-    color: white;
-    text-transform: uppercase;
-    font-weight: bold;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    margin-left: 5px;
-    cursor: pointer;
-    transition: background 0.2s ease-out;
-  }
+.ToDo-edit {
+  background: none;
+  border: none;
+  outline: none;
+  resize: vertical;
+  overflow: hidden;
+  min-width: 70%;
+}
 
-  .edit-form button:hover {
-    background: #ff5e5e;
-  }
-  .edit-form input,
-  .edit-form button {
-    font-family: "Quicksand", sans-serif;
-    height: 3rem;
-  }
-  
+::-webkit-resizer {
+  border-left: 2px solid transparent;
+  border-bottom: 2px solid white;
+  border-width:100px;
+}
 
 .ToDo-task {
     position: relative;
-    transition: opacity 0.4s linear;
     width: fit-content;
     max-width: 70%;
     white-space: normal;
@@ -62,8 +37,7 @@
 }
 
 .ToDo-task-text {
-    /* I don't know why this is needed, I just added it and it worked in IE Edge. If we remove this width, the gradient breaks in IE Edge */
-    width: calc(100% + 20px);
+    width: calc(100%);
     background-image: linear-gradient(transparent calc(100% - 2px), white 10px);
     background-repeat: no-repeat;
     background-size: 0% 100%;

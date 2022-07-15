@@ -4,6 +4,7 @@ import "./ToDo.css";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
+import { TextareaAutosize } from "@mui/base";
 
 export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, isCompleted}) {
   const [isEditing, setIsEditing] = useState(false);
@@ -33,8 +34,8 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
   return (
     <>
       {isEditing && 
-        <form className="ToDo edit-form" onSubmit={handleEdit}>
-          <input name="task" id="editForm" value={taskWhileEditing} onInput={handleInput}/>
+        <form className="ToDo" onSubmit={handleEdit}>
+          <textarea className="ToDo-task ToDo-edit" autoFocus name="task" value={taskWhileEditing} onInput={handleInput}/>
           <button>SUBMIT</button>
         </form>
       }
