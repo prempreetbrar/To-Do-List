@@ -30,19 +30,21 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
   return (
     <>
       {isEditing && 
-        <form className="Todo" onSubmit={handleEdit}>
+        <form className="ToDo" onSubmit={handleEdit}>
           <input name="task" id="editForm" value={taskWhileEditing} onInput={handleInput}/>
           <button>SUBMIT</button>
         </form>
       }
 
       {!isEditing &&
-        <>
-          {isCompleted && <li className="completed Todo" onClick={handleToggle}>Task: {task}</li>}
-          {!isCompleted && <li className="Todo" onClick={handleToggle}>Task: {task}</li>}
-          <button onClick={handleDelete}>X</button>
-          <button onClick={handleEdit}>Edit</button>
-        </>
+        <div className="ToDo">
+          {isCompleted && <li className="ToDo-task completed" onClick={handleToggle}>Task: {task}</li>}
+          {!isCompleted && <li className="ToDo-task" onClick={handleToggle}>Task: {task}</li>}
+          <div className="ToDo-buttons">
+            <button onClick={handleDelete}>X</button>
+            <button onClick={handleEdit}>Edit</button>
+          </div>
+        </div>
       }
     </>
   )
