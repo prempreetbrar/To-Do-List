@@ -3,6 +3,7 @@ import { useState } from "react";
 import NewToDoForm from "./NewToDoForm";
 import ToDo from "./ToDo";
 import "./ToDoList.css"
+import Switch from '@mui/material/Switch';
 
 export default function ToDoList() {
   const [allToDos, setAllToDos] = useState([]);
@@ -47,6 +48,10 @@ export default function ToDoList() {
           />)
         }
       </ul>
+      <span id="moveDone" style={{alignSelf: "flex-end"}}>
+        Move done items at the end?
+        <Switch color="default" sx={{marginBottom: "0.2rem"}} />
+      </span>
       <NewToDoForm addToList={addToList}/>
     </div>
   )

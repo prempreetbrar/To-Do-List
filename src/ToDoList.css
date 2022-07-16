@@ -9,6 +9,7 @@
     background: #25a17a;
     color: white;
     box-shadow: -20px -20px 0px 0px rgba(100, 100, 100, 0.1);
+    letter-spacing: 0.05em;
 }
 
 .ToDoList h1 {
@@ -30,4 +31,9 @@
     margin-bottom: 0.7rem;
     margin-left: 0.1rem;
     margin-top: 0.2rem;
+}
+
+#moveDone {
+    font-size: 0.8rem;
+    font-weight: lighter;
 }

@@ -44,7 +44,7 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
       }
 
       {!isEditing &&
-        <div className="ToDo">
+        <div className={isCompleted ? "ToDo completed" : "ToDo"}>
           {<li className="ToDo-task" onClick={handleToggle}>
             <span className={isCompleted ? "ToDo-task-text strikethrough" : "ToDo-task-text"}>{task}</span>
           </li>}

@@ -1,4 +1,7 @@
 import { useState } from "react";
+import "./NewToDoForm.css";
+import AddIcon from '@mui/icons-material/Add';
+import { IconButton } from "@mui/material";
 
 import {v4 as uuidv4} from "uuid";
 
@@ -16,9 +19,15 @@ export default function NewToDoForm({addToList}) {
   }
 
   return (
-    <form className="NewToDoForm" onSubmit={handleSubmit}>
-      <input name="task" placeholder={"New Task"} onInput={handleInput} value={task}/>
-      <button>ADD</button>
-    </form>
+    <div className="NewToDoForm">
+      <span>Add to the ToDo List
+      </span>
+      <form>
+        <textarea className="NewToDoForm-taskInput" name="task" placeholder={"New Task"} onInput={handleInput} value={task}/>
+        <IconButton sx={{marginLeft: "0.5rem", marginBottom: "3rem"}}onClick={handleSubmit}>
+          <AddIcon fontSize="large" sx={{color: "white"}}/>
+        </IconButton>
+      </form>
+    </div>
   )
 }

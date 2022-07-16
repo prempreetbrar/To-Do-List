@@ -1,0 +1,20 @@
+.NewToDoForm {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.NewToDoForm-taskInput {
+  outline: none;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.5rem;
+
+  resize: vertical;
+  overflow: hidden;
+  min-width: 70%;
+  min-height: fit-content;
+
+  font-size: inherit;
+  font-family: inherit;
+  color: black;
+}
