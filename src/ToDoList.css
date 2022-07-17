@@ -8,7 +8,7 @@
     max-width: 500px;
     background: #25a17a;
     color: white;
-    box-shadow: -20px -20px 0px 0px rgba(100, 100, 100, 0.1);
+    box-shadow: -20px -20px 0px 0px #25a17a36;
     letter-spacing: 0.05em;
 }
 

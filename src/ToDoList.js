@@ -1,27 +1,36 @@
+import "./ToDoList.css"
+
 import { useEffect, useState } from "react";
 
-import NewToDoForm from "./NewToDoForm";
-import ToDo from "./ToDo";
-import "./ToDoList.css"
 import Switch from '@mui/material/Switch';
 import FlipMove from 'react-flip-move';
+import NewToDoForm from "./NewToDoForm";
+import ToDo from "./ToDo";
+
 
 
 export default function ToDoList() {
-  console.log("I'm executing first! (function)");
   const [allToDos, setAllToDos] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
 
-  useEffect(() => {
-    if (allToDos.length > 0)
-    localStorage.setItem("allToDos", JSON.stringify(allToDos));
-  }, [allToDos]);
 
   useEffect(() => {
-    console.log("I'm executing first (useEffect)");
+    /* on every "first" render, allToDos is set to an empty list. However,
+       we don't want to put this in storage and override our stored tasks */
+    if (allToDos.length > 0) {
+      localStorage.setItem("allToDos", JSON.stringify(allToDos));
+    }
+  }, [allToDos]);
+
+
+  useEffect(() => {
     const allToDosFromStorage = JSON.parse(localStorage.getItem("allToDos"));
-    console.log(allToDosFromStorage)
-    if (allToDosFromStorage) setAllToDos(allToDosFromStorage);
+    /* on the very first render ever or after clearing cookies, local storage is null, 
+       in these situations we don't want to make our ToDos null and instead want to keep
+       an empty list */
+    if (allToDosFromStorage) {
+      setAllToDos(allToDosFromStorage);
+    }
   }, [])
 
 
