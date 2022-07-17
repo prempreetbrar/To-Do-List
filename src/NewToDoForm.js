@@ -5,6 +5,7 @@ import { useState } from "react";
 import AddIcon from '@mui/icons-material/Add';
 import { Tooltip, IconButton } from "@mui/material";
 import {v4 as uuidv4} from "uuid";
+import { ButtonWithTooltip } from "./HigherOrderComponents";
 
 
 
@@ -16,7 +17,7 @@ export default function NewToDoForm({addToList}) {
     setTask(event.target.value);
   }
 
-  function handleSubmit(event) {
+  function handleAdd(event) {
     event.preventDefault();
     addToList({id: uuidv4(), task, isCompleted: false});
     // empty the new task field after we've added our task to the list
@@ -26,28 +27,9 @@ export default function NewToDoForm({addToList}) {
 
   function AddButton() {
     return (
-      <Tooltip 
-        placement="top" 
-        arrow 
-        title="Add"
-        componentsProps={{
-          tooltip: {
-            sx: {
-              bgcolor: 'common.black',
-              '& .MuiTooltip-arrow': {
-                color: 'common.black',
-              },
-            },
-          },
-        }}
-      >
-        <IconButton 
-          sx={{marginLeft: "0.5rem", marginBottom: "3rem"}} 
-          onClick={handleSubmit}
-        >
-          <AddIcon fontSize="large" className="NewToDoForm-addIcon"/>
-        </IconButton>
-      </Tooltip>
+      <ButtonWithTooltip title="Add" onClick={handleAdd}>
+          <AddIcon className="NewToDoForm-addIcon"/>
+      </ButtonWithTooltip>
     );
   }
 
@@ -56,7 +38,7 @@ export default function NewToDoForm({addToList}) {
     <div className="NewToDoForm">
       <span>Add to the ToDo List</span>
 
-      <form>
+      <form style={{display: "flex", alignItems: "center"}}>
         <textarea 
           className="NewToDoForm-taskInput" 
           name="task" 

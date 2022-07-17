@@ -4,6 +4,7 @@ import { forwardRef, useState } from "react";
 
 import { Check, Edit, Delete } from "@mui/icons-material";
 import { Tooltip, IconButton } from '@mui/material';
+import { ButtonWithTooltip } from "./HigherOrderComponents";
 
 
 
@@ -53,48 +54,26 @@ const ToDo = forwardRef(({id, task, isCompleted, deleteToDo, updateItem}, ref) =
   }
 
   function EditButton() {
-    <Tooltip 
-        placement="top" 
-        arrow 
-        title="Save"
-        componentsProps={{
-          tooltip: {
-            sx: {
-              bgcolor: 'common.black',
-              '& .MuiTooltip-arrow': {
-                color: 'common.black',
-              },
-            },
-          },
-        }}
-      >
-        <IconButton onClick={handleEditComplete}>
-          <Check className="ToDo-icons"/>
-        </IconButton>
-      </Tooltip>
+    return (
+      <ButtonWithTooltip title="Edit" onClick={handleEdit}>
+          <Edit className="ToDo-icons"/>
+      </ButtonWithTooltip>
+    ); 
   }
 
   function EditCompleteButton() {
     return (
-      <Tooltip 
-        placement="top" 
-        arrow 
-        title="Save"
-        componentsProps={{
-          tooltip: {
-            sx: {
-              bgcolor: 'common.black',
-              '& .MuiTooltip-arrow': {
-                color: 'common.black',
-              },
-            },
-          },
-        }}
-      >
-        <IconButton onClick={handleEditComplete}>
+      <ButtonWithTooltip title="Save" onClick={handleEditComplete}>
           <Check className="ToDo-icons"/>
-        </IconButton>
-      </Tooltip>
+      </ButtonWithTooltip>
+    );
+  }
+
+  function DeleteButton() {
+    return (
+      <ButtonWithTooltip title="Delete" onClick={handleDelete}>
+          <Delete className="ToDo-icons"/>
+      </ButtonWithTooltip>
     );
   }
 
@@ -106,27 +85,25 @@ const ToDo = forwardRef(({id, task, isCompleted, deleteToDo, updateItem}, ref) =
     );
   }
 
+  function ToDoDisplay() {
+    return (
+      <div ref={ref} className={`ToDo ${isCompleted ? "completed" : ""}`}>
+        {ToDoTask()}
+
+        <div className="ToDo-buttons">
+          {EditButton()}
+          {DeleteButton()}
+        </div>
+      </div>
+    );
+  }
+
+
   return (
     <>
-      {isEditing && EditForm()}
-      {!isEditing &&
-        <div ref={ref} className={isCompleted ? "ToDo completed" : "ToDo"}>
-          {ToDoTask()}
-
-
-          <div className="ToDo-buttons">
-            <IconButton onClick={handleEdit}>
-              <Edit sx={{color: "white"}}/>
-            </IconButton>
-
-            <IconButton onClick={handleDelete}>
-              <Delete sx={{color: "white"}}/>
-            </IconButton>
-          </div>
-        </div>
-      }
+      {isEditing ? EditForm() : ToDoDisplay()}
     </>
-  )
+  );
 });
 
 export default ToDo;
