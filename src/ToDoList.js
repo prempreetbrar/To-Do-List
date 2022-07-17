@@ -7,6 +7,7 @@ import Switch from '@mui/material/Switch';
 
 export default function ToDoList() {
   const [allToDos, setAllToDos] = useState([]);
+  const [isSorted, setIsSorted] = useState(false);
 
   function addToList(newToDo) {
     setAllToDos([...allToDos, newToDo]);
@@ -31,14 +32,28 @@ export default function ToDoList() {
     setAllToDos(newAllToDos);
   }
 
+  function toggleSorted(event) {
+    setIsSorted(isSorted => !isSorted);
+  }
+
+  function getSortedToDos() {
+    const sortedToDos = [...allToDos];
+    sortedToDos.sort((task1, task2) => {
+      const isTask1Done = task1.isCompleted;
+      const isTask2Done = task2.isCompleted;
+      return isTask1Done - isTask2Done;
+    });
+    return sortedToDos;
+  }
+
   return (
     <div className="ToDoList"> 
       <h1>
         ToDo List
         <span>Prioritize your goals and maximize productivity</span>
       </h1>
-      <ul>
-        {allToDos.map(toDoItem => 
+      <ol>
+        {!isSorted && allToDos.map(toDoItem => 
           <ToDo 
             key={toDoItem.id} 
             {...toDoItem}
@@ -47,10 +62,19 @@ export default function ToDoList() {
             toggleComplete={toggleComplete}
           />)
         }
-      </ul>
+        {isSorted && getSortedToDos().map(toDoItem => 
+          <ToDo 
+            key={toDoItem.id} 
+            {...toDoItem}
+            deleteToDo={deleteToDo} 
+            editToDo={editToDo}
+            toggleComplete={toggleComplete}
+          />)
+        }
+      </ol>
       <span id="moveDone" style={{alignSelf: "flex-end"}}>
         Move done items at the end?
-        <Switch color="default" sx={{marginBottom: "0.2rem"}} />
+        <Switch color="default" sx={{marginBottom: "0.2rem"}} onChange={toggleSorted} />
       </span>
       <NewToDoForm addToList={addToList}/>
     </div>
