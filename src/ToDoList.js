@@ -10,14 +10,14 @@ import ToDo from "./ToDo";
 
 
 export default function ToDoList() {
-  const [allToDos, setAllToDos] = useState([]);
+  const [allToDos, setAllToDos] = useState(null);
   const [isSorted, setIsSorted] = useState(false);
 
 
   useEffect(() => {
-    /* on every "first" render, allToDos is set to an empty list. However,
+    /* on every "first" render, allToDos is set to null. However,
        we don't want to put this in storage and override our stored tasks */
-    if (allToDos.length > 0) {
+    if (allToDos) {
       localStorage.setItem("allToDos", JSON.stringify(allToDos));
     }
   }, [allToDos]);
@@ -25,35 +25,35 @@ export default function ToDoList() {
 
   useEffect(() => {
     const allToDosFromStorage = JSON.parse(localStorage.getItem("allToDos"));
-    /* on the very first render ever or after clearing cookies, local storage is null, 
-       in these situations we don't want to make our ToDos null and instead want to keep
-       an empty list */
-    if (allToDosFromStorage) {
-      setAllToDos(allToDosFromStorage);
-    }
+    /* we are fine with allToDos being null since we initialize it to null anyway;
+       no conditional check is needed (albeit this only applies if user clears cookies
+       or is rendering app for first time) */
+    setAllToDos(allToDosFromStorage);
   }, [])
 
 
   function addToList(newToDo) {
-    setAllToDos([...allToDos, newToDo]);
+    setAllToDos([...allToDos || [], newToDo]);
   }
 
-  function deleteToDo(toDoId) {
-    const newAllToDos = allToDos.filter(toDo => toDo.id !== toDoId);
+  function deleteToDo(idOfTaskToDelete) {
+    const newAllToDos = allToDos.filter(toDo => toDo.id !== idOfTaskToDelete);
     setAllToDos(newAllToDos);
   }
 
-  function editToDo(toDoId, newTask) {
-    const taskToEdit = allToDos.find(toDo => toDo.id === toDoId);
-    const positionInList = allToDos.indexOf(taskToEdit);
-    const newAllToDos = [...allToDos.slice(0, positionInList), {...taskToEdit, task: newTask}, ...allToDos.slice(positionInList + 1)];
-    setAllToDos(newAllToDos);
+  function editToDo(idOfItemToEdit, newTask) {
+    updateItem(idOfItemToEdit, "task", newTask);
   }
 
-  function toggleComplete(toDoId) {
-    const taskToComplete = allToDos.find(toDo => toDo.id === toDoId);
-    const positionInList = allToDos.indexOf(taskToComplete);
-    const newAllToDos = [...allToDos.slice(0, positionInList), {...taskToComplete, isCompleted: !taskToComplete.isCompleted}, ...allToDos.slice(positionInList + 1)];
+
+  function toggleComplete(idOfItemToComplete, newBoolean) {
+    updateItem(idOfItemToComplete, "isCompleted", newBoolean);
+  }
+
+  function updateItem(idOfItemToUpdate, key, updatedValue) {
+    const itemToUpdate =  allToDos.find(toDo => toDo.id === idOfItemToUpdate);
+    const positionInList = allToDos.indexOf(itemToUpdate);
+    const newAllToDos = [...allToDos.slice(0, positionInList), {...itemToUpdate, [key]: updatedValue}, ...allToDos.slice(positionInList + 1)];
     setAllToDos(newAllToDos);
   }
 
@@ -85,7 +85,7 @@ export default function ToDoList() {
         typeName="ol"
       >
         {!isSorted && 
-            allToDos.map(toDoItem => 
+            allToDos?.map(toDoItem => 
             <ToDo 
               className="move"
               key={toDoItem.id} 
@@ -96,7 +96,7 @@ export default function ToDoList() {
             />)
         }
         {isSorted && 
-          getSortedToDos().map(toDoItem => 
+          getSortedToDos()?.map(toDoItem => 
             <ToDo 
             className="move"
               key={toDoItem.id} 

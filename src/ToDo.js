@@ -31,7 +31,7 @@ const ToDo = forwardRef(({id, task, deleteToDo, editToDo, toggleComplete, isComp
   }
 
   function handleToggle(event) {
-    toggleComplete(id);
+    toggleComplete(id, !isCompleted);
   }
 
   return (
