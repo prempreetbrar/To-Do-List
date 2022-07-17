@@ -22,7 +22,6 @@ export default function ToDoList() {
     }
   }, [allToDos]);
 
-
   useEffect(() => {
     const allToDosFromStorage = JSON.parse(localStorage.getItem("allToDos"));
     /* we are fine with allToDos being null since we initialize it to null anyway;
@@ -36,26 +35,22 @@ export default function ToDoList() {
     setAllToDos([...allToDos || [], newToDo]);
   }
 
-  function deleteToDo(idOfTaskToDelete) {
-    const newAllToDos = allToDos.filter(toDo => toDo.id !== idOfTaskToDelete);
+  function deleteToDo(idOfTaskToDeleted) {
+    const newAllToDos = allToDos.filter(toDo => toDo.id !== idOfTaskToDeleted);
     setAllToDos(newAllToDos);
-  }
-
-  function editToDo(idOfItemToEdit, newTask) {
-    updateItem(idOfItemToEdit, "task", newTask);
-  }
-
-
-  function toggleComplete(idOfItemToComplete, newBoolean) {
-    updateItem(idOfItemToComplete, "isCompleted", newBoolean);
   }
 
   function updateItem(idOfItemToUpdate, key, updatedValue) {
     const itemToUpdate =  allToDos.find(toDo => toDo.id === idOfItemToUpdate);
     const positionInList = allToDos.indexOf(itemToUpdate);
-    const newAllToDos = [...allToDos.slice(0, positionInList), {...itemToUpdate, [key]: updatedValue}, ...allToDos.slice(positionInList + 1)];
+    const newAllToDos = [
+      ...allToDos.slice(0, positionInList), 
+      {...itemToUpdate, [key]: updatedValue}, 
+      ...allToDos.slice(positionInList + 1)
+    ];
     setAllToDos(newAllToDos);
   }
+
 
   function toggleSorted(event) {
     setIsSorted(isSorted => !isSorted);
@@ -63,20 +58,51 @@ export default function ToDoList() {
 
   function getSortedToDos() {
     const sortedToDos = [...allToDos];
-    sortedToDos.sort((task1, task2) => {
-      const isTask1Done = task1.isCompleted;
-      const isTask2Done = task2.isCompleted;
-      return isTask1Done - isTask2Done;
-    });
+    // JavaScript coerces the booleans to 0 or 1 (depending on if it is false or true)
+    sortedToDos.sort((task1, task2) => task1.isCompleted - task2.isCompleted);
     return sortedToDos;
   }
 
-  return (
-    <div className="ToDoList"> 
+
+  function Title() {
+    return (
       <h1>
         ToDo List
         <span>Prioritize your goals and maximize productivity</span>
       </h1>
+    );
+  }
+
+  function ToDoListItems(list) {
+    /* we need optional chaining because the list is null when local storage is empty
+       (ie. when app is opened for the first time or cookies have just been cleared) */
+    return (
+      list?.map(toDoItem => 
+        <ToDo 
+          className="move"
+          key={toDoItem.id} 
+          {...toDoItem}
+          deleteToDo={deleteToDo}
+          updateItem={updateItem}
+        />
+      )
+    );
+  }
+
+  function SortByCompletionPrompt() {
+    return (
+      <span className="ToDoList-moveDone">
+        Move done items at the end?
+        <Switch className="ToDoList-moveDone-switch" color="default" onChange={toggleSorted} />
+      </span>
+    );
+  }
+
+  
+  return (
+    <div className="ToDoList"> 
+      {Title()}
+
       <FlipMove
         staggerDurationBy="30"
         duration={500}
@@ -84,35 +110,12 @@ export default function ToDoList() {
         leaveAnimation="none"
         typeName="ol"
       >
-        {!isSorted && 
-            allToDos?.map(toDoItem => 
-            <ToDo 
-              className="move"
-              key={toDoItem.id} 
-              {...toDoItem}
-              deleteToDo={deleteToDo} 
-              editToDo={editToDo}
-              toggleComplete={toggleComplete}
-            />)
-        }
-        {isSorted && 
-          getSortedToDos()?.map(toDoItem => 
-            <ToDo 
-            className="move"
-              key={toDoItem.id} 
-              {...toDoItem}
-              deleteToDo={deleteToDo} 
-              editToDo={editToDo}
-              toggleComplete={toggleComplete}
-            />)
-        }
+        {!isSorted && ToDoListItems(allToDos)}
+        {isSorted && ToDoListItems(getSortedToDos())}
       </FlipMove>
-      <span id="moveDone" style={{alignSelf: "flex-end"}}>
-        Move done items at the end?
-        <Switch color="default" sx={{marginBottom: "0.2rem"}} onChange={toggleSorted} />
-      </span>
+
+      {SortByCompletionPrompt()}
       <NewToDoForm addToList={addToList}/>
     </div>
-  )
-
+  );
 }

@@ -8,7 +8,7 @@ import { Icon, IconButton } from '@mui/material';
 import { TextareaAutosize } from "@mui/base";
 import FlipMove from 'react-flip-move';
 
-const ToDo = forwardRef(({id, task, deleteToDo, editToDo, toggleComplete, isCompleted}, ref) => {
+const ToDo = forwardRef(({id, task, deleteToDo, updateItem, isCompleted}, ref) => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [taskWhileEditing, setTaskWhileEditing] = useState(task);
@@ -25,13 +25,13 @@ const ToDo = forwardRef(({id, task, deleteToDo, editToDo, toggleComplete, isComp
     event.preventDefault();
     if (!isEditing) setIsEditing(true);
     else {    
-      editToDo(id, taskWhileEditing);
+      updateItem(id, "task", taskWhileEditing);
       setIsEditing(false);
     }
   }
 
   function handleToggle(event) {
-    toggleComplete(id, !isCompleted);
+    updateItem(id, "isCompleted", !isCompleted);
   }
 
   return (
