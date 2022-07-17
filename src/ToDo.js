@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 
 import "./ToDo.css";
 import CheckIcon from '@mui/icons-material/Check';
@@ -6,8 +6,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Icon, IconButton } from '@mui/material';
 import { TextareaAutosize } from "@mui/base";
+import Fade from '@mui/material/Fade';
 
-export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, isCompleted}) {
+const ToDo = forwardRef(({id, task, deleteToDo, editToDo, toggleComplete, isCompleted}, ref) => {
   const [isEditing, setIsEditing] = useState(false);
   const [taskWhileEditing, setTaskWhileEditing] = useState(task);
 
@@ -35,7 +36,7 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
   return (
     <>
       {isEditing && 
-        <form className="ToDo" onSubmit={handleEdit}>
+        <form className="ToDo" ref={ref} onSubmit={handleEdit}>
           <textarea className="ToDo-task ToDo-edit" autoFocus name="task" value={taskWhileEditing} onInput={handleInput}/>
           <IconButton onClick={handleEdit}>
             <CheckIcon sx={{color: "white"}}/>
@@ -44,7 +45,7 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
       }
 
       {!isEditing &&
-        <div className={isCompleted ? "ToDo completed" : "ToDo"}>
+        <div ref={ref} className={isCompleted ? "ToDo completed" : "ToDo"}>
           {<li className="ToDo-task" onClick={handleToggle}>
             <span className={isCompleted ? "ToDo-task-text strikethrough" : "ToDo-task-text"}>{task}</span>
           </li>}
@@ -61,4 +62,6 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
       }
     </>
   )
-}
+});
+
+export default ToDo;

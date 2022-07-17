@@ -4,6 +4,7 @@ import NewToDoForm from "./NewToDoForm";
 import ToDo from "./ToDo";
 import "./ToDoList.css"
 import Switch from '@mui/material/Switch';
+import { Fade } from "@mui/material";
 
 export default function ToDoList() {
   const [allToDos, setAllToDos] = useState([]);
@@ -54,22 +55,30 @@ export default function ToDoList() {
       </h1>
       <ol>
         {!isSorted && allToDos.map(toDoItem => 
-          <ToDo 
+          <Fade easing="ease-in-out" key={toDoItem.id} in={true} timeout={1000}>
+            <div>
+            <ToDo 
             key={toDoItem.id} 
             {...toDoItem}
             deleteToDo={deleteToDo} 
             editToDo={editToDo}
             toggleComplete={toggleComplete}
-          />)
+            />
+          </div>
+          </Fade>)
         }
         {isSorted && getSortedToDos().map(toDoItem => 
-          <ToDo 
+          <Fade easing="ease-in-out" key={toDoItem.id} in={true} timeout={1000}>
+          <div>
+            <ToDo 
             key={toDoItem.id} 
             {...toDoItem}
             deleteToDo={deleteToDo} 
             editToDo={editToDo}
             toggleComplete={toggleComplete}
-          />)
+            />
+          </div>
+        </Fade>)
         }
       </ol>
       <span id="moveDone" style={{alignSelf: "flex-end"}}>
