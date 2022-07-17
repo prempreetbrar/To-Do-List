@@ -4,6 +4,8 @@ import NewToDoForm from "./NewToDoForm";
 import ToDo from "./ToDo";
 import "./ToDoList.css"
 import Switch from '@mui/material/Switch';
+import FlipMove from 'react-flip-move';
+
 
 export default function ToDoList() {
   const [allToDos, setAllToDos] = useState([]);
@@ -52,26 +54,36 @@ export default function ToDoList() {
         ToDo List
         <span>Prioritize your goals and maximize productivity</span>
       </h1>
-      <ol>
-        {!isSorted && allToDos.map(toDoItem => 
-          <ToDo 
-            key={toDoItem.id} 
-            {...toDoItem}
-            deleteToDo={deleteToDo} 
-            editToDo={editToDo}
-            toggleComplete={toggleComplete}
-          />)
+      <FlipMove
+        staggerDurationBy="30"
+        duration={500}
+        enterAnimation="fade"
+        leaveAnimation="fade"
+        typeName="ol"
+      >
+        {!isSorted && 
+            allToDos.map(toDoItem => 
+            <ToDo 
+              className="move"
+              key={toDoItem.id} 
+              {...toDoItem}
+              deleteToDo={deleteToDo} 
+              editToDo={editToDo}
+              toggleComplete={toggleComplete}
+            />)
         }
-        {isSorted && getSortedToDos().map(toDoItem => 
-          <ToDo 
-            key={toDoItem.id} 
-            {...toDoItem}
-            deleteToDo={deleteToDo} 
-            editToDo={editToDo}
-            toggleComplete={toggleComplete}
-          />)
+        {isSorted && 
+          getSortedToDos().map(toDoItem => 
+            <ToDo 
+            className="move"
+              key={toDoItem.id} 
+              {...toDoItem}
+              deleteToDo={deleteToDo} 
+              editToDo={editToDo}
+              toggleComplete={toggleComplete}
+            />)
         }
-      </ol>
+      </FlipMove>
       <span id="moveDone" style={{alignSelf: "flex-end"}}>
         Move done items at the end?
         <Switch color="default" sx={{marginBottom: "0.2rem"}} onChange={toggleSorted} />

@@ -6,8 +6,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Icon, IconButton } from '@mui/material';
 import { TextareaAutosize } from "@mui/base";
+import FlipMove from 'react-flip-move';
+import React, { forwardRef } from 'react';
 
-export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, isCompleted}) {
+const ToDo = forwardRef(({id, task, deleteToDo, editToDo, toggleComplete, isCompleted}, ref) => {
+  console.log(ref);
+  console.log("I AM RENDERED!")
+
   const [isEditing, setIsEditing] = useState(false);
   const [taskWhileEditing, setTaskWhileEditing] = useState(task);
 
@@ -33,7 +38,7 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
   }
 
   return (
-    <>
+    <div ref={ref}>
       {isEditing && 
         <form className="ToDo" onSubmit={handleEdit}>
           <textarea className="ToDo-task ToDo-edit" autoFocus name="task" value={taskWhileEditing} onInput={handleInput}/>
@@ -59,6 +64,8 @@ export default function ToDo({id, task, deleteToDo, editToDo, toggleComplete, is
           </div>
         </div>
       }
-    </>
+    </div>
   )
-}
+});
+
+export default ToDo;
