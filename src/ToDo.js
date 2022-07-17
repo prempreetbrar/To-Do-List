@@ -9,8 +9,6 @@ import { TextareaAutosize } from "@mui/base";
 import FlipMove from 'react-flip-move';
 
 const ToDo = forwardRef(({id, task, deleteToDo, editToDo, toggleComplete, isCompleted}, ref) => {
-  console.log(ref);
-  console.log("I AM RENDERED!")
 
   const [isEditing, setIsEditing] = useState(false);
   const [taskWhileEditing, setTaskWhileEditing] = useState(task);

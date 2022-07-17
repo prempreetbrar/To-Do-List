@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import NewToDoForm from "./NewToDoForm";
 import ToDo from "./ToDo";
@@ -8,8 +8,22 @@ import FlipMove from 'react-flip-move';
 
 
 export default function ToDoList() {
+  console.log("I'm executing first! (function)");
   const [allToDos, setAllToDos] = useState([]);
   const [isSorted, setIsSorted] = useState(false);
+
+  useEffect(() => {
+    if (allToDos.length > 0)
+    localStorage.setItem("allToDos", JSON.stringify(allToDos));
+  }, [allToDos]);
+
+  useEffect(() => {
+    console.log("I'm executing first (useEffect)");
+    const allToDosFromStorage = JSON.parse(localStorage.getItem("allToDos"));
+    console.log(allToDosFromStorage)
+    if (allToDosFromStorage) setAllToDos(allToDosFromStorage);
+  }, [])
+
 
   function addToList(newToDo) {
     setAllToDos([...allToDos, newToDo]);
