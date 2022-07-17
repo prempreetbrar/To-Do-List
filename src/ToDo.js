@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 
 import "./ToDo.css";
 import CheckIcon from '@mui/icons-material/Check';
@@ -7,7 +7,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Icon, IconButton } from '@mui/material';
 import { TextareaAutosize } from "@mui/base";
 import FlipMove from 'react-flip-move';
-import React, { forwardRef } from 'react';
 
 const ToDo = forwardRef(({id, task, deleteToDo, editToDo, toggleComplete, isCompleted}, ref) => {
   console.log(ref);
@@ -40,7 +39,7 @@ const ToDo = forwardRef(({id, task, deleteToDo, editToDo, toggleComplete, isComp
   return (
     <div ref={ref}>
       {isEditing && 
-        <form className="ToDo" onSubmit={handleEdit}>
+        <form className="ToDo" ref={ref} onSubmit={handleEdit}>
           <textarea className="ToDo-task ToDo-edit" autoFocus name="task" value={taskWhileEditing} onInput={handleInput}/>
           <IconButton onClick={handleEdit}>
             <CheckIcon sx={{color: "white"}}/>
@@ -49,7 +48,7 @@ const ToDo = forwardRef(({id, task, deleteToDo, editToDo, toggleComplete, isComp
       }
 
       {!isEditing &&
-        <div className={isCompleted ? "ToDo completed" : "ToDo"}>
+        <div ref={ref} className={isCompleted ? "ToDo completed" : "ToDo"}>
           {<li className="ToDo-task" onClick={handleToggle}>
             <span className={isCompleted ? "ToDo-task-text strikethrough" : "ToDo-task-text"}>{task}</span>
           </li>}

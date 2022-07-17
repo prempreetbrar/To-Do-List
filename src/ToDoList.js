@@ -58,7 +58,7 @@ export default function ToDoList() {
         staggerDurationBy="30"
         duration={500}
         enterAnimation="fade"
-        leaveAnimation="fade"
+        leaveAnimation="none"
         typeName="ol"
       >
         {!isSorted && 
