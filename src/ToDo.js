@@ -3,7 +3,7 @@ import "./ToDo.css";
 import { forwardRef, useState } from "react";
 
 import { Check, Edit, Delete } from "@mui/icons-material";
-import { IconButton } from '@mui/material';
+import { Tooltip, IconButton } from '@mui/material';
 
 
 
@@ -37,22 +37,83 @@ const ToDo = forwardRef(({id, task, isCompleted, deleteToDo, updateItem}, ref) =
   }
 
 
-  return (
-    <div ref={ref}>
-      {isEditing && 
-        <form className="ToDo" ref={ref} onSubmit={handleEdit}>
-          <textarea className="ToDo-task ToDo-edit" autoFocus name="task" value={taskWhileEditing} onInput={handleInput}/>
-          <IconButton onClick={handleEditComplete}>
-            <Check sx={{color: "white"}}/>
-          </IconButton>
-        </form>
-      }
+  function EditForm() {
+    return (
+      <form className="ToDo" ref={ref}>
+        <textarea 
+          className="ToDo-task ToDo-edit" 
+          autoFocus 
+          value={taskWhileEditing} 
+          onInput={handleInput}
+        />
 
+        {EditCompleteButton()}
+      </form>
+    );
+  }
+
+  function EditButton() {
+    <Tooltip 
+        placement="top" 
+        arrow 
+        title="Save"
+        componentsProps={{
+          tooltip: {
+            sx: {
+              bgcolor: 'common.black',
+              '& .MuiTooltip-arrow': {
+                color: 'common.black',
+              },
+            },
+          },
+        }}
+      >
+        <IconButton onClick={handleEditComplete}>
+          <Check className="ToDo-icons"/>
+        </IconButton>
+      </Tooltip>
+  }
+
+  function EditCompleteButton() {
+    return (
+      <Tooltip 
+        placement="top" 
+        arrow 
+        title="Save"
+        componentsProps={{
+          tooltip: {
+            sx: {
+              bgcolor: 'common.black',
+              '& .MuiTooltip-arrow': {
+                color: 'common.black',
+              },
+            },
+          },
+        }}
+      >
+        <IconButton onClick={handleEditComplete}>
+          <Check className="ToDo-icons"/>
+        </IconButton>
+      </Tooltip>
+    );
+  }
+
+  function ToDoTask() {
+    return (
+      <li className="ToDo-task" onClick={handleToggle}>
+        <span className={`ToDo-task-text ${isCompleted ? "strikethrough" : ""}`}>{task}</span>
+      </li>
+    );
+  }
+
+  return (
+    <>
+      {isEditing && EditForm()}
       {!isEditing &&
         <div ref={ref} className={isCompleted ? "ToDo completed" : "ToDo"}>
-          {<li className="ToDo-task" onClick={handleToggle}>
-            <span className={isCompleted ? "ToDo-task-text strikethrough" : "ToDo-task-text"}>{task}</span>
-          </li>}
+          {ToDoTask()}
+
+
           <div className="ToDo-buttons">
             <IconButton onClick={handleEdit}>
               <Edit sx={{color: "white"}}/>
@@ -64,7 +125,7 @@ const ToDo = forwardRef(({id, task, isCompleted, deleteToDo, updateItem}, ref) =
           </div>
         </div>
       }
-    </div>
+    </>
   )
 });
 
