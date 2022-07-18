@@ -1,5 +1,5 @@
-# ToDoList
-A simple ToDoList made using React.js and Material-UI. **Click [*here*](https://prempreetbrar.github.io/To-Do-List/) to 
+# ToDo List
+A simple ToDo List made using React.js and Material-UI. **Click [*here*](https://prempreetbrar.github.io/To-Do-List/) to 
 try it out!** Or, watch a quick gif of me using it below:
 
 ![](To-Do-List-Demo.gif)
@@ -54,7 +54,7 @@ cd <putThePathYouCopiedHereUsingControlV (without the angle brackets)>
 npm install
 npm start
 ```
-This will open up the ToDoList using your computer as a host in your default browser. (It may take up to a minute to load when starting the app up initially).
+This will open up the ToDo List using your computer as a host in your default browser. (It may take up to a minute to load when starting the app up initially).
 
 &nbsp;
     
@@ -83,7 +83,7 @@ cd <putThePathYouCopiedHereUsingControlV (without the angle brackets)>
 npm install
 npm start
 ```
-This will open up the ToDoList using your computer as a host in your default browser. (It may take up to a minute to load when starting the app up initially).
+This will open up the ToDo List using your computer as a host in your default browser. (It may take up to a minute to load when starting the app up initially).
     
 &nbsp;    
 
@@ -113,4 +113,4 @@ This will open up the ToDoList using your computer as a host in your default bro
     npm start
     ```
 
-This will open up the To-Do-List using your computer as a host in your default browser. (It may take up to a minute to load when starting the app up initially).
+This will open up the ToDo List using your computer as a host in your default browser. (It may take up to a minute to load when starting the app up initially).
