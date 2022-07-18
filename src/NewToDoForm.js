@@ -5,7 +5,7 @@ import { useState } from "react";
 import AddIcon from '@mui/icons-material/Add';
 import { Tooltip, IconButton } from "@mui/material";
 import {v4 as uuidv4} from "uuid";
-import { ButtonWithTooltip } from "./HigherOrderComponents";
+import { ButtonWithTooltip } from "./ButtonWithTooltip";
 
 
 

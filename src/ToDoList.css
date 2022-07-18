@@ -1,49 +1,49 @@
 .ToDoList {
-    display: flex;
-    flex-direction: column;
-    white-space: nowrap;
-    
-    margin: 4rem auto;
-    padding: 2rem 3rem 3rem;
-    max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
 
-    background: #25a17a;
-    color: white;
-    box-shadow: -20px -20px 0px 0px #25a17a36;
-    letter-spacing: 0.05em;
+  margin: 4rem auto;
+  padding: 2rem 3rem 3rem;
+  max-width: 500px;
+
+  background: #25a17a;
+  color: white;
+  box-shadow: -20px -20px 0px 0px #25a17a36;
+  letter-spacing: 0.05em;
 }
 
 .ToDoList h1 {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    font-weight: normal;
-    font-size: 2.6rem;
-    letter-spacing: 0.05em;
+  font-weight: normal;
+  font-size: 2.6rem;
+  letter-spacing: 0.05em;
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .ToDoList ol {
-    margin-top: 2.6rem;
-    list-style: none;
+  margin-top: 2.6rem;
+  list-style: none;
 }
 
 .ToDoList h1 span {
-    margin-bottom: 0.7rem;
-    margin-left: 0.1rem;
-    margin-top: 0.2rem;
+  margin-bottom: 0.7rem;
+  margin-left: 0.1rem;
+  margin-top: 0.2rem;
 
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 .ToDoList-moveDone {
-    align-self: flex-end;
-    
-    font-size: 0.8rem;
-    font-weight: lighter;
+  align-self: flex-end;
+  
+  font-size: 0.8rem;
+  font-weight: lighter;
 }
 
 .ToDoList-moveDone-switch {
-    margin-bottom: 0.2rem;
+  margin-bottom: 0.2rem;
 }

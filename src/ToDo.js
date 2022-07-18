@@ -3,8 +3,7 @@ import "./ToDo.css";
 import { forwardRef, useState } from "react";
 
 import { Check, Edit, Delete } from "@mui/icons-material";
-import { Tooltip, IconButton } from '@mui/material';
-import { ButtonWithTooltip } from "./HigherOrderComponents";
+import { ButtonWithTooltip } from "./ButtonWithTooltip";
 
 
 
@@ -24,11 +23,12 @@ const ToDo = forwardRef(({id, task, isCompleted, deleteToDo, updateItem}, ref) =
   }
 
   function handleEdit(event) {
-    event.preventDefault();
     setIsEditing(true);
   }
 
   function handleEditComplete(event) {
+    /* when editing is finished we send the new task to the parent
+       so it can update the item */
     updateItem(id, "task", taskWhileEditing);
     setIsEditing(false);
   }
@@ -40,7 +40,7 @@ const ToDo = forwardRef(({id, task, isCompleted, deleteToDo, updateItem}, ref) =
 
   function EditForm() {
     return (
-      <form className="ToDo" ref={ref}>
+      <form className="ToDo">
         <textarea 
           className="ToDo-task ToDo-edit" 
           autoFocus 
@@ -56,7 +56,7 @@ const ToDo = forwardRef(({id, task, isCompleted, deleteToDo, updateItem}, ref) =
   function EditButton() {
     return (
       <ButtonWithTooltip title="Edit" onClick={handleEdit}>
-          <Edit className="ToDo-icons"/>
+        <Edit className="ToDo-icons"/>
       </ButtonWithTooltip>
     ); 
   }
@@ -64,7 +64,7 @@ const ToDo = forwardRef(({id, task, isCompleted, deleteToDo, updateItem}, ref) =
   function EditCompleteButton() {
     return (
       <ButtonWithTooltip title="Save" onClick={handleEditComplete}>
-          <Check className="ToDo-icons"/>
+        <Check className="ToDo-icons"/>
       </ButtonWithTooltip>
     );
   }
@@ -72,7 +72,7 @@ const ToDo = forwardRef(({id, task, isCompleted, deleteToDo, updateItem}, ref) =
   function DeleteButton() {
     return (
       <ButtonWithTooltip title="Delete" onClick={handleDelete}>
-          <Delete className="ToDo-icons"/>
+        <Delete className="ToDo-icons"/>
       </ButtonWithTooltip>
     );
   }
@@ -80,12 +80,16 @@ const ToDo = forwardRef(({id, task, isCompleted, deleteToDo, updateItem}, ref) =
   function ToDoTask() {
     return (
       <li className="ToDo-task" onClick={handleToggle}>
-        <span className={`ToDo-task-text ${isCompleted ? "strikethrough" : ""}`}>{task}</span>
+        <span className={`ToDo-task-text ${isCompleted ? "strikethrough" : ""}`}>
+          {task}
+        </span>
       </li>
     );
   }
 
   function ToDoDisplay() {
+    /* the animation library requires a reference to the DOM node 
+       that renders the list item */
     return (
       <div ref={ref} className={`ToDo ${isCompleted ? "completed" : ""}`}>
         {ToDoTask()}
@@ -100,9 +104,7 @@ const ToDo = forwardRef(({id, task, isCompleted, deleteToDo, updateItem}, ref) =
 
 
   return (
-    <>
-      {isEditing ? EditForm() : ToDoDisplay()}
-    </>
+    <> {isEditing ? EditForm() : ToDoDisplay()} </>
   );
 });
 

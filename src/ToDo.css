@@ -1,14 +1,21 @@
 .ToDo {
     display: flex;
-    margin: 0 -3rem 0.75rem;
-    padding: 0rem 2.25rem 0rem 3rem;
     justify-content: space-between;
     align-items: center;
+
+    margin: 0 -3rem 0.75rem;
+    padding: 0rem 2.25rem 0rem 3rem;
+    
     background: rgba(255, 255, 255, 0.1);
 }
 
 .completed {
   opacity: 0.4;
+}
+
+.strikethrough {
+  opacity: 0.55;
+  background-size: 100% 62.5%;
 }
 
 .ToDo-icons {
@@ -29,6 +36,7 @@
   font: inherit;
   letter-spacing: inherit;
   color: white;
+
   margin: 1.1rem 0;
 }
 
@@ -39,25 +47,23 @@
 }
 
 .ToDo-task {
-    position: relative;
-    width: fit-content;
-    max-width: 70%;
-    white-space: normal;
-    overflow-wrap: break-word;
-  
-    padding: 1rem 0;
-    cursor: pointer;
+  position: relative;
+  width: fit-content;
+  max-width: 70%;
+
+  white-space: normal;
+  overflow-wrap: break-word;
+  cursor: pointer;
+
+  padding: 1rem 0;
 }
 
 .ToDo-task-text {
-    width: calc(100%);
-    background-image: linear-gradient(transparent calc(100% - 2px), white 10px);
-    background-repeat: no-repeat;
-    background-size: 0% 100%;
-    transition: background-size 1.5s;
-}
+  width: calc(100%);
 
-.strikethrough {
-  opacity: 0.55;
-  background-size: 100% 62.5%;
+  background-image: linear-gradient(transparent calc(100% - 2px), white 10px);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+
+  transition: background-size 1.5s;
 }
