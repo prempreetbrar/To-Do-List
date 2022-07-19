@@ -37,8 +37,10 @@
 
 ::-webkit-resizer {
   border-left: 2px solid transparent;
-  border-bottom: 2px solid white;
-  border-width:100px;
+  border-bottom: 2px solid rgb(0, 0, 0);
+  border-width: 15px;
+  
+  cursor: pointer;
 }
 
 .ToDo-task {
