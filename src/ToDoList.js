@@ -103,17 +103,19 @@ export default function ToDoList() {
     <div className="ToDoList"> 
       {Title()}
 
-      <FlipMove
-        staggerDurationBy="30"
-        duration={500}
-        enterAnimation="fade"
-        leaveAnimation="none"
-        typeName="ol"
-      >
-        {!isSorted && ToDoListItems(allToDos)}
-        {isSorted && ToDoListItems(getSortedToDos())}
-      </FlipMove>
-
+      <div className="ToDoList-flip">
+        <FlipMove
+          staggerDurationBy="30"
+          duration={500}
+          enterAnimation="fade"
+          leaveAnimation="none"
+          typeName="ol"
+        >
+          {!isSorted && ToDoListItems(allToDos)}
+          {isSorted && ToDoListItems(getSortedToDos())}
+        </FlipMove>
+      </div>
+  
       {SortByCompletionPrompt()}
       <NewToDoForm addToList={addToList}/>
     </div>
