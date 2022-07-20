@@ -26,7 +26,7 @@ try it out!** Or, watch a quick gif of me using it below:
   - Crossing out multi-line tasks
   - Re-sizing the ToDo edit and new ToDo forms
   - Custom resizer on all browsers except FireFox
-- The React code is my own; the features mentioned in the features section above were implemented by myself.
+- The React code is my own; the features mentioned in the features section above were implemented by me.
 
 &nbsp;
 
@@ -47,7 +47,7 @@ try it out!** Or, watch a quick gif of me using it below:
 
 5. Check if you have node installed by running ```node --version``` in the terminal. If not, open the .msi installation package and click "repair." Follow the steps.
 
-6. Click on the green button on the top right that says "Code". Click download ZIP, unzip the file, right click on the *To-do-list-master* folder and select *copy as path*. Open up a terminal and write
+6. Click on the green button on the top right that says "Code". Click download ZIP, unzip the file, right click on the *To-Do-List-master* folder and select *copy as path*. Open up a terminal and write
 
 ```
 cd <putThePathYouCopiedHereUsingControlV (without the angle brackets)>
@@ -72,8 +72,9 @@ in the terminal.
 
 3. Check if you have node and npm installed by running ```node --version``` and ```npm --version``` in the terminal. If not, repeat step 2.
     
-4. Click on the green button on the top right that says "Code". Click download ZIP, right click on the *To-do-list-master* folder, click *Get Info*, copy the path (the text beside *Where*): 
-<img width="396" alt="Screen Shot 2022-07-11 at 9 35 16 PM" src="https://user-images.githubusercontent.com/89614923/178403232-ecdc241b-42fa-4c87-ba6b-3d8981adbefd.png">
+4. Click on the green button on the top right that says "Code". Click download ZIP, right click on the *To-Do-List-master* folder, click *Get Info*, copy the path (the text beside *Where*): 
+![image](https://user-images.githubusercontent.com/89614923/179906018-6d3de9c6-f740-4aca-a269-4582369c366b.png)
+
 
     
 5. Open up a terminal and write
@@ -105,10 +106,10 @@ This will open up the ToDo List using your computer as a host in your default br
 
 5. Open up a terminal (or use the same one) and write ```node --version``` and ```npm --version```. If either node or npm are missing, repeat steps 1-4.
 
-6. Click on the green button on the top right that says "Code". Click download ZIP, and then unzip the *To-do-list-master* folder. Open up a terminal (or use the same one) and write
+6. Click on the green button on the top right that says "Code". Click download ZIP, and then unzip the *To-Do-List-master* folder. Open up a terminal (or use the same one) and write
     
     ```
-    cd ~/<Your Username>/Downloads/To-do-list-master
+    cd ~/<Your Username>/Downloads/To-Do-List-master
     npm install
     npm start
     ```
